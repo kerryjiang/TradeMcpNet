@@ -14,7 +14,7 @@
     <RepositoryUrl>https://github.com/kerryjiang/EtradeMcpNet.git</RepositoryUrl>
     <PackageReadmeFile>../../releaseNotes/v$(PackageVersion).md</PackageReadmeFile>
   </PropertyGroup>
-  <PropertyGroup Condition="'exists($(PackageReadmeFile))'">
+  <PropertyGroup Condition="Exists('$(PackageReadmeFile)')">
     <ReadmeFileAvailable>true</ReadmeFileAvailable>
   </PropertyGroup>
   <PropertyGroup Condition="'$(IncludeReleaseNotes)' == 'true' and ReadmeFileAvailable == 'true'">
