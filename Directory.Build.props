@@ -13,10 +13,13 @@
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/kerryjiang/EtradeMcpNet.git</RepositoryUrl>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(IncludeReleaseNotes)' == 'true'">
+  <PropertyGroup Condition="'exists('../../releaseNotes/v$(PackageVersion).md')">
+    <ReadmeFile>../../releaseNotes/v$(PackageVersion).md</ReadmeFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(IncludeReleaseNotes)' == 'true' and ReadmeFile != ''">
     <PackageReadmeFile>v$(PackageVersion).md</PackageReadmeFile>
   </PropertyGroup>
-  <ItemGroup Condition="'$(IncludeReleaseNotes)' == 'true'">
-    <None Include="../../releaseNotes/v$(PackageVersion).md" Pack="true" PackagePath="/" />
+  <ItemGroup Condition="'$(IncludeReleaseNotes)' == 'true' and ReadmeFile != ''">
+    <None Include="$(ReadmeFile)" Pack="true" PackagePath="/" />
   </ItemGroup>
 </Project>
