@@ -31,7 +31,16 @@ try
     Console.Error.WriteLine($"Using sandbox: {etradeConfig.UseSandbox}");
 
     // Load the E*TRADE OpenAPI spec from embedded resource
-    var openApiSpec = EtradeOpenApiSpec.GetOpenApiSpec();
+    string openApiSpec;
+    try
+    {
+        openApiSpec = EtradeOpenApiSpec.GetOpenApiSpec();
+    }
+    catch (InvalidOperationException ex)
+    {
+        Console.Error.WriteLine($"Failed to load E*TRADE OpenAPI spec: {ex.Message}");
+        return 1;
+    }
     Console.Error.WriteLine("E*TRADE OpenAPI spec loaded successfully from embedded resource");
 
     // Build the MCP server - pass empty args to avoid parsing URL as host args
