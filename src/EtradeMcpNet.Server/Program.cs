@@ -31,16 +31,8 @@ try
     Console.Error.WriteLine($"Using sandbox: {etradeConfig.UseSandbox}");
 
     // Load the E*TRADE OpenAPI spec from embedded resource
-    var openApiSpecPath = Path.Combine(AppContext.BaseDirectory, "etrade-api.yaml");
-    
-    if (!File.Exists(openApiSpecPath))
-    {
-        Console.Error.WriteLine($"OpenAPI spec file not found: {openApiSpecPath}");
-        return 1;
-    }
-
-    var openApiSpec = await File.ReadAllTextAsync(openApiSpecPath);
-    Console.Error.WriteLine("E*TRADE OpenAPI spec loaded successfully");
+    var openApiSpec = EtradeOpenApiSpec.GetOpenApiSpec();
+    Console.Error.WriteLine("E*TRADE OpenAPI spec loaded successfully from embedded resource");
 
     // Build the MCP server - pass empty args to avoid parsing URL as host args
     var builder = Host.CreateApplicationBuilder(Array.Empty<string>());
